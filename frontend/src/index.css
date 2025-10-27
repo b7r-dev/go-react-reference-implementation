@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Apple-inspired elevation shadows - subtle and refined */
+  --shadow-depth-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-depth: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-depth-lg: 0 4px 16px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-depth-xl: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --shadow-glass-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Humanist/Grotesque monospace typography */
+body {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Roboto Mono', 'Fira Mono', 'Monaco', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.02em;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+
+/* Light mode - Enhanced texture with depth and center glow */
+.bg-texture-light {
+  background-color: #f5f5f7 !important;
+  background-image:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.08) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.03) 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.012) 0px,
+      rgba(0, 0, 0, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    radial-gradient(circle at 20% 30%, rgba(0, 113, 227, 0.05) 0px, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(175, 82, 222, 0.05) 0px, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.03) 0px, transparent 60%) !important;
+}
+
+/* Dark mode - Enhanced depth with liquid glass effect and center glow */
+.dark .bg-texture-light {
+  background-color: #000000 !important;
+  background-image:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.045) 0px,
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    radial-gradient(circle at 20% 30%, rgba(0, 113, 227, 0.12) 0px, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(175, 82, 222, 0.12) 0px, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.06) 0px, transparent 60%) !important;
+}
+
+.bg-texture-dark {
+  background-color: #f5f5f7 !important;
+  background-image:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.08) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.03) 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.012) 0px,
+      rgba(0, 0, 0, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    radial-gradient(circle at 20% 30%, rgba(0, 113, 227, 0.05) 0px, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(175, 82, 222, 0.05) 0px, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.03) 0px, transparent 60%) !important;
+}
+
+.dark .bg-texture-dark {
+  background-color: #000000 !important;
+  background-image:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.045) 0px,
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    radial-gradient(circle at 20% 30%, rgba(0, 113, 227, 0.12) 0px, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(175, 82, 222, 0.12) 0px, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.06) 0px, transparent 60%) !important;
+}
+
+/* Liquid glass effect - 2025 glassmorphism */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.4) 100%
+  ) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.dark .glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  ) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.glass-dark {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.4) 100%
+  ) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.dark .glass-dark {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  ) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Apple-inspired smooth transitions - refined timing */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter;
+  transition-timing-function: cubic-bezier(0.28, 0, 0.4, 1);
+  transition-duration: 250ms;
+}
+
+/* Apple-inspired icon button - minimal with subtle feedback */
+.icon-btn {
+  background: transparent !important;
+  border: none !important;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.28, 0, 0.4, 1) !important;
+  cursor: pointer;
+}
+
+.icon-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 0.4s ease-in-out;
+}
+
+.icon-btn:hover::before {
+  border-color: rgba(0, 113, 227, 0.4);
+  animation: pulse-ring-subtle 3s ease-in-out infinite;
+}
+
+.icon-btn:active {
+  transform: scale(0.92) !important;
+}
+
+.dark .icon-btn:hover::before {
+  border-color: rgba(10, 132, 255, 0.5);
+}
+
+/* Apple-inspired error state button */
+.icon-btn-red {
+  background: transparent !important;
+  border: none !important;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.28, 0, 0.4, 1) !important;
+  cursor: pointer;
+}
+
+.icon-btn-red::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 0.4s ease-in-out;
+}
+
+.icon-btn-red:hover::before {
+  border-color: rgba(255, 59, 48, 0.4);
+  animation: pulse-ring-subtle 3s ease-in-out infinite;
+}
+
+.icon-btn-red:active {
+  transform: scale(0.92) !important;
+}
+
+.dark .icon-btn-red:hover::before {
+  border-color: rgba(255, 69, 58, 0.5);
+}
+
+/* Subtle pulsing ring animation - HAL 9000 style */
+@keyframes pulse-ring-subtle {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
