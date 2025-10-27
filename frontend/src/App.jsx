@@ -236,18 +236,18 @@ function App() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div className="glass rounded-2xl p-4 shadow-depth">
-              <p className="text-2xl sm:text-3xl font-semibold text-green-600 dark:text-green-400">{users.length}</p>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Records</p>
+              <p className="text-2xl sm:text-3xl font-semibold text-green-600 dark:text-green-400">{users.length}</p>
             </div>
             <div className="glass rounded-2xl p-4 shadow-depth">
-              <p className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400">100%</p>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Uptime</p>
+              <p className="text-2xl sm:text-3xl font-semibold text-blue-600 dark:text-blue-400">100%</p>
             </div>
             <div className="glass rounded-2xl p-4 shadow-depth">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Optimized</p>
               <div className="flex items-center justify-center">
                 <Zap className="h-10 w-10 sm:h-12 sm:w-12 text-yellow-500 dark:text-yellow-400" />
               </div>
-              <p className="text-xs sm:text-sm mt-2 text-gray-600 dark:text-gray-400">Optimized</p>
             </div>
           </div>
         </div>
