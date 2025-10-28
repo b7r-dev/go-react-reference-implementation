@@ -7,12 +7,11 @@ import {
   Calendar,
   RefreshCw,
   Activity,
-  Zap,
-  Sun,
-  Moon,
-  Layers
+  Zap
 } from 'lucide-react'
 import ComponentLibrary from './ComponentLibrary'
+import Header from './Header'
+import Footer from './Footer'
 import mockApi from './mockApi'
 
 function App() {
@@ -113,41 +112,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-texture-light dark:bg-texture-dark">
-      {/* Header */}
-      <header className="header-glass sticky top-0 z-50 shadow-depth">
-
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white tracking-tight">
-                b7r.dev Boilerplate
-              </h1>
-              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 font-normal">Full-stack reference implementation</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setShowComponentLibrary(true)}
-                className="icon-btn p-1 sm:p-1.5 rounded-xl"
-                aria-label="View component library"
-              >
-                <Layers className="h-5 w-5 sm:h-6 sm:w-6 text-gray-700 dark:text-gray-200" />
-              </button>
-              <button
-                onClick={toggleDarkMode}
-                className="icon-btn p-1 sm:p-1.5 rounded-xl"
-                aria-label="Toggle dark mode"
-              >
-                {darkMode ? (
-                  <Sun className="h-5 w-5 sm:h-6 sm:w-6 text-gray-700 dark:text-gray-200" />
-                ) : (
-                  <Moon className="h-5 w-5 sm:h-6 sm:w-6 text-gray-700" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header
+        title="b7r.dev Boilerplate"
+        subtitle="Full-stack reference implementation"
+        darkMode={darkMode}
+        onToggleDarkMode={toggleDarkMode}
+        onShowComponentLibrary={() => setShowComponentLibrary(true)}
+        showComponentLibraryButton={true}
+        showGithubLink={true}
+      />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Hello World Card */}
@@ -247,12 +220,7 @@ function App() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="glass border-t border-gray-200/50 dark:border-gray-800/50 mt-8 sm:mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center text-sm sm:text-base text-gray-600 dark:text-gray-400">
-          <p>b7r.dev — Full-stack boilerplate with Go, React, Vite, and Tailwind CSS</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
