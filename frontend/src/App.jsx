@@ -13,6 +13,7 @@ import {
   Layers
 } from 'lucide-react'
 import ComponentLibrary from './ComponentLibrary'
+import mockApi from './mockApi'
 
 function App() {
   const [hello, setHello] = useState(null)
@@ -26,29 +27,23 @@ function App() {
     return saved !== null ? JSON.parse(saved) : true
   })
 
-  const API_BASE_URL = 'http://localhost:8080/api'
-
   const fetchData = async () => {
     setLoading(true)
     setError(null)
 
     try {
-      // Fetch all data in parallel
-      const [helloRes, usersRes, quoteRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/hello`),
-        fetch(`${API_BASE_URL}/users`),
-        fetch(`${API_BASE_URL}/quote/random`)
+      // Fetch all data in parallel using mock API
+      const [helloData, usersData, quoteData] = await Promise.all([
+        mockApi.getHello(),
+        mockApi.getUsers(),
+        mockApi.getRandomQuote()
       ])
-
-      const helloData = await helloRes.json()
-      const usersData = await usersRes.json()
-      const quoteData = await quoteRes.json()
 
       setHello(helloData.data)
       setUsers(usersData.data)
       setQuote(quoteData.data)
     } catch (err) {
-      setError('Unable to connect to the backend API. Ensure the Go server is running on port 8080.')
+      setError('Unable to load data. Please try again.')
       console.error('Error fetching data:', err)
     } finally {
       setLoading(false)
@@ -57,8 +52,7 @@ function App() {
 
   const fetchNewQuote = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/quote/random`)
-      const data = await response.json()
+      const data = await mockApi.getRandomQuote()
       setQuote(data.data)
     } catch (err) {
       console.error('Error fetching quote:', err)
