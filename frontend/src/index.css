@@ -100,6 +100,78 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
+/* Apple-inspired icon button - minimal with subtle feedback */
+.icon-btn {
+  background: transparent !important;
+  border: none !important;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.28, 0, 0.4, 1) !important;
+  cursor: pointer;
+}
+
+.icon-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 0.4s ease-in-out;
+}
+
+.icon-btn:hover::before {
+  border-color: rgba(0, 113, 227, 0.4);
+  animation: pulse-ring-subtle 3s ease-in-out infinite;
+}
+
+.icon-btn:active {
+  transform: scale(0.92) !important;
+}
+
+.dark .icon-btn:hover::before {
+  border-color: rgba(10, 132, 255, 0.5);
+}
+
+/* Apple-inspired error state button */
+.icon-btn-red {
+  background: transparent !important;
+  border: none !important;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.28, 0, 0.4, 1) !important;
+  cursor: pointer;
+}
+
+.icon-btn-red::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 0.4s ease-in-out;
+}
+
+.icon-btn-red:hover::before {
+  border-color: rgba(255, 59, 48, 0.4);
+  animation: pulse-ring-subtle 3s ease-in-out infinite;
+}
+
+.icon-btn-red:active {
+  transform: scale(0.92) !important;
+}
+
+.dark .icon-btn-red:hover::before {
+  border-color: rgba(255, 69, 58, 0.5);
+}
+
+/* Subtle pulsing ring animation - HAL 9000 style */
+@keyframes pulse-ring-subtle {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
 /* Enhanced header blur - stronger glassmorphism */
 .header-glass {
   background: linear-gradient(
