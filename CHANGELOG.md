@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0] - 2026-04-14
+
+### Fixed
+- Restored `.icon-btn`, `.icon-btn-red`, and `@keyframes pulse-ring-subtle` CSS rules that were accidentally deleted during the Tailwind v4 cleanup
+- Added global `cursor: pointer` override for interactive elements to counter Tailwind v4 preflight
+
 ## [2.0.0] - 2026-04-14
 
 ### Changed
