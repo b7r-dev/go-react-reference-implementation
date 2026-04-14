@@ -179,5 +179,5 @@ MIT License - feel free to use this boilerplate for any project.
 
 ## Links
 
-- **Demo:** [ref.b7r.dev](https://b7r.dev)
+- **Demo:** [ref.b7r.dev](https://ref.b7r.dev)
 - **Repository:** [github.com/b7r-dev/go-react-reference-implementation](https://github.com/b7r-dev/go-react-reference-implementation)
