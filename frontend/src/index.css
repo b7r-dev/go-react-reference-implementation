@@ -12,6 +12,11 @@
   --shadow-glass-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
+/* Override Tailwind preflight: restore pointer cursor on interactive elements */
+a, button, [role="button"], input[type="checkbox"], input[type="radio"], select {
+  cursor: pointer;
+}
+
 /* Humanist/Grotesque monospace typography */
 body {
   font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Roboto Mono', 'Fira Mono', 'Monaco', monospace;

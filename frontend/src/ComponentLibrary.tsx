@@ -73,7 +73,7 @@ function ComponentLibrary({ onBack }: ComponentLibraryProps) {
   )
 
   const Button = ({ children, variant = 'primary', size = 'md', icon, ...props }: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-    const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 shadow-depth hover:shadow-depth-lg active:scale-95 cursor-pointer'
+    const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 shadow-depth hover:shadow-depth-lg active:scale-95'
 
     const variants: Record<ButtonVariant, string> = {
       primary: 'bg-indigo-500 hover:bg-indigo-600 text-white dark:bg-indigo-600 dark:hover:bg-indigo-700',
@@ -132,7 +132,7 @@ function ComponentLibrary({ onBack }: ComponentLibraryProps) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-2xl font-medium transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-2xl font-medium transition-all ${
                   activeTab === tab.id
                     ? 'bg-blue-500 text-white shadow-depth'
                     : 'hover:bg-white/50 dark:hover:bg-gray-800/50 text-gray-700 dark:text-gray-300'
@@ -242,7 +242,7 @@ function ComponentLibrary({ onBack }: ComponentLibraryProps) {
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
                     >
                       {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
@@ -466,7 +466,7 @@ function ComponentLibrary({ onBack }: ComponentLibraryProps) {
                         </p>
                       </div>
                     </div>
-                    <button className="p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+                    <button className="p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                       <X className="h-4 w-4 text-gray-600 dark:text-gray-300" />
                     </button>
                   </div>
@@ -573,7 +573,7 @@ function ComponentLibrary({ onBack }: ComponentLibraryProps) {
                         This is what a modal would look like with glassmorphism design
                       </p>
                     </div>
-                    <button className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+                    <button className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                       <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
                     </button>
                   </div>
