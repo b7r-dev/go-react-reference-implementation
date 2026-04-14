@@ -33,7 +33,7 @@ func (h *Handler) HelloHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]interface{}{
 		"message":   "Hello, World!",
 		"timestamp": time.Now().Format(time.RFC3339),
-		"version":   "1.0.0",
+		"version":   "2.0.0",
 	}
 
 	utils.WriteSuccess(w, "Welcome to Go Boilerplate API", data)
@@ -120,4 +120,3 @@ func (h *Handler) GetAllQuotesHandler(w http.ResponseWriter, r *http.Request) {
 	quotes := h.quoteService.GetAllQuotes()
 	utils.WriteSuccess(w, "All quotes retrieved", quotes)
 }
-
