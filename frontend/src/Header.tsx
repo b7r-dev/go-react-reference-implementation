@@ -1,14 +1,24 @@
 import { Sun, Moon, Layers, Github } from 'lucide-react'
 
-function Header({ 
-  title, 
-  subtitle, 
-  darkMode, 
-  onToggleDarkMode, 
+interface HeaderProps {
+  title: string
+  subtitle?: string
+  darkMode: boolean
+  onToggleDarkMode: () => void
+  onShowComponentLibrary: () => void
+  showComponentLibraryButton?: boolean
+  showGithubLink?: boolean
+}
+
+function Header({
+  title,
+  subtitle,
+  darkMode,
+  onToggleDarkMode,
   onShowComponentLibrary,
   showComponentLibraryButton = true,
-  showGithubLink = true 
-}) {
+  showGithubLink = true,
+}: HeaderProps) {
   return (
     <header className="header-glass sticky top-0 z-50 shadow-depth">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
@@ -63,4 +73,3 @@ function Header({
 }
 
 export default Header
-

@@ -1,32 +1,33 @@
 # b7r.dev Go + React Reference Implementation
 
-Modern full-stack reference implementation featuring Go backend with React + Vite + Tailwind CSS frontend. This boilerplate showcases best practices for building production-ready web applications with a beautiful, Apple-inspired glassmorphism UI.
+Modern full-stack reference implementation featuring Go backend with React + TypeScript + Vite + Tailwind CSS v4 frontend. This boilerplate showcases best practices for building production-ready web applications with a beautiful, Apple-inspired glassmorphism UI.
 
 **[View the live demo →](https://ref.b7r.dev/)**
 
-## ✨ Features
+## Features
 
 ### Backend (Go)
 - Clean architecture with service layer pattern
-- RESTful API with gorilla/mux router
+- RESTful API with Go 1.22+ enhanced `http.ServeMux`
 - Structured logging with logrus
 - Configuration management with viper
 - CORS middleware
 - Health check endpoints
 - Sample data models and services
 
-### Frontend (React + Vite)
-- ⚡ Lightning-fast Vite dev server with HMR
-- 🎨 Tailwind CSS v4 with custom design system
-- 🌓 Dark mode with localStorage persistence
-- 💎 2025 liquid glassmorphism UI
-- 🎯 Apple-inspired design language
-- 📚 Comprehensive component library
-- 🔤 Humanist monospace typography (JetBrains Mono, IBM Plex Mono)
-- ♿ Accessible with proper contrast ratios
-- 📱 Fully responsive design
+### Frontend (React + TypeScript + Vite)
+- TypeScript with strict mode
+- Lightning-fast Vite dev server with HMR
+- Tailwind CSS v4 with CSS-first configuration
+- Dark mode with localStorage persistence
+- 2025 liquid glassmorphism UI
+- Apple-inspired design language
+- Comprehensive component library
+- Humanist monospace typography (JetBrains Mono, IBM Plex Mono)
+- Accessible with proper contrast ratios
+- Fully responsive design
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Interactive Setup
 
@@ -55,7 +56,7 @@ npm run dev
 **Backend:** http://localhost:8080
 **Frontend:** http://localhost:5173
 
-## 📡 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -66,7 +67,7 @@ npm run dev
 | GET | `/api/quotes` | List all quotes |
 | GET | `/api/quote/random` | Get random quote |
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 .
@@ -75,48 +76,38 @@ npm run dev
 │   └── config.go
 ├── cmd/
 │   └── server/            # HTTP server setup
+│       ├── handlers.go
+│       ├── middleware.go
+│       ├── routes.go
 │       └── server.go
 ├── pkg/
 │   ├── models/            # Data models
-│   │   ├── user.go
-│   │   └── quote.go
+│   │   └── user.go
 │   ├── services/          # Business logic layer
 │   │   ├── user_service.go
 │   │   └── quote_service.go
 │   └── utils/             # Utility functions
-│       └── logger.go
-└── frontend/              # React application
+│       ├── logger.go
+│       ├── response.go
+│       └── response_test.go
+└── frontend/              # React + TypeScript application
     ├── src/
-    │   ├── App.jsx        # Main application
-    │   ├── ComponentLibrary.jsx
+    │   ├── types.ts       # Shared TypeScript interfaces
+    │   ├── App.tsx        # Main application
+    │   ├── Header.tsx     # Header component
+    │   ├── Footer.tsx     # Footer component
+    │   ├── ComponentLibrary.tsx
+    │   ├── mockApi.ts     # Mock API service
     │   ├── index.css      # Custom styles & glassmorphism
-    │   └── main.jsx
+    │   └── main.tsx       # Entry point
+    ├── tsconfig.json
+    ├── eslint.config.js
+    ├── postcss.config.js
     ├── index.html
-    ├── package.json
-    ├── vite.config.js
-    └── tailwind.config.js
+    └── package.json
 ```
 
-## 🎨 Design System
-
-### Typography
-- **Primary Font:** JetBrains Mono (grotesque monospace)
-- **Fallback:** IBM Plex Mono (humanist monospace)
-- **Features:** Ligatures, contextual alternates, optimized letter spacing
-
-### Color Palette
-- **Apple Blue:** `rgb(0, 113, 227)` / `rgb(10, 132, 255)`
-- **Apple Purple:** `rgb(175, 82, 222)`
-- **Apple Red:** `rgb(255, 59, 48)` / `rgb(255, 69, 58)`
-- **Emerald:** `rgb(52, 211, 153)`
-
-### Glassmorphism
-- Liquid glass effect with 24px blur and 200% saturation
-- Gradient backgrounds with transparency
-- Inset highlights for depth
-- Enhanced backdrop filters
-
-## 🛠️ Build for Production
+## Build for Production
 
 ```bash
 # Build backend
@@ -129,7 +120,7 @@ npm run build
 
 The frontend build output will be in `frontend/dist/`.
 
-## 🧪 Development
+## Development
 
 ### Backend
 ```bash
@@ -156,37 +147,37 @@ npm run build
 # Preview production build
 npm run preview
 
+# Type-check
+npx tsc --noEmit
+
 # Lint
 npm run lint
 ```
 
-## 📦 Dependencies
+## Dependencies
 
 ### Backend
-- `github.com/gorilla/mux` - HTTP router
+- `net/http` (Go 1.22+ enhanced ServeMux) - HTTP router
 - `github.com/sirupsen/logrus` - Structured logging
 - `github.com/spf13/viper` - Configuration
 - `github.com/joho/godotenv` - Environment variables
 
 ### Frontend
-- `react` - UI library
+- `react` / `react-dom` - UI library
+- `typescript` - Type safety
 - `vite` - Build tool
-- `tailwindcss` - Utility-first CSS
+- `tailwindcss` v4 - Utility-first CSS (CSS-first config)
 - `lucide-react` - Icon library
 
-## 🤝 Contributing
+## Contributing
 
 This is a reference implementation. Feel free to fork and adapt for your own projects.
 
-## 📄 License
+## License
 
 MIT License - feel free to use this boilerplate for any project.
 
-## 🔗 Links
+## Links
 
 - **Demo:** [ref.b7r.dev](https://b7r.dev)
 - **Repository:** [github.com/b7r-dev/go-react-reference-implementation](https://github.com/b7r-dev/go-react-reference-implementation)
-
----
-
-Built with ❤️ by b7r.dev

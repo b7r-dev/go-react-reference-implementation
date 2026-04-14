@@ -1,4 +1,4 @@
-.PHONY: help run build test clean frontend-install frontend-dev frontend-build
+.PHONY: help run build test clean frontend-install frontend-dev frontend-build frontend-lint frontend-typecheck
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -27,6 +27,12 @@ frontend-dev: ## Run frontend development server
 
 frontend-build: ## Build frontend for production
 	cd frontend && npm run build
+
+frontend-lint: ## Lint frontend code
+	cd frontend && npm run lint
+
+frontend-typecheck: ## Type-check frontend TypeScript
+	cd frontend && npx tsc --noEmit
 
 dev: ## Run both backend and frontend (requires separate terminals)
 	@echo "Run 'make run' in one terminal and 'make frontend-dev' in another"

@@ -7,19 +7,20 @@ import {
   Calendar,
   RefreshCw,
   Activity,
-  Zap
+  Zap,
 } from 'lucide-react'
+import type { HelloData, Quote, User } from './types'
 import ComponentLibrary from './ComponentLibrary'
 import Header from './Header'
 import Footer from './Footer'
 import mockApi from './mockApi'
 
 function App() {
-  const [hello, setHello] = useState(null)
-  const [users, setUsers] = useState([])
-  const [quote, setQuote] = useState(null)
+  const [hello, setHello] = useState<HelloData | null>(null)
+  const [users, setUsers] = useState<User[]>([])
+  const [quote, setQuote] = useState<Quote | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const [showComponentLibrary, setShowComponentLibrary] = useState(false)
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode')
@@ -31,11 +32,10 @@ function App() {
     setError(null)
 
     try {
-      // Fetch all data in parallel using mock API
       const [helloData, usersData, quoteData] = await Promise.all([
         mockApi.getHello(),
         mockApi.getUsers(),
-        mockApi.getRandomQuote()
+        mockApi.getRandomQuote(),
       ])
 
       setHello(helloData.data)
@@ -59,7 +59,7 @@ function App() {
   }
 
   const toggleDarkMode = () => {
-    setDarkMode(prev => !prev)
+    setDarkMode((prev: boolean) => !prev)
   }
 
   useEffect(() => {
@@ -75,14 +75,13 @@ function App() {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
   }, [darkMode])
 
-  // Show component library if requested
   if (showComponentLibrary) {
     return <ComponentLibrary onBack={() => setShowComponentLibrary(false)} />
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-texture-light dark:bg-texture-dark flex items-center justify-center">
+      <div className="min-h-screen bg-texture-light flex items-center justify-center">
         <div className="glass rounded-3xl p-8 shadow-depth">
           <Loader2 className="h-16 w-16 text-blue-600 dark:text-blue-400 animate-spin mx-auto" />
           <p className="mt-4 text-gray-700 dark:text-gray-300 text-lg font-medium">Initializing...</p>
@@ -93,7 +92,7 @@ function App() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-texture-light dark:bg-texture-dark flex items-center justify-center p-4">
+      <div className="min-h-screen bg-texture-light flex items-center justify-center p-4">
         <div className="glass rounded-3xl shadow-depth-xl p-8 max-w-md">
           <AlertTriangle className="h-16 w-16 text-red-600 dark:text-red-400 mx-auto mb-4" />
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 tracking-tight">Connection Error</h2>
@@ -111,7 +110,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-texture-light dark:bg-texture-dark">
+    <div className="min-h-screen bg-texture-light">
       <Header
         title="b7r.dev Boilerplate"
         subtitle="Full-stack reference implementation"
@@ -123,7 +122,6 @@ function App() {
       />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Hello World Card */}
         {hello && (
           <div className="glass rounded-3xl shadow-depth p-6 sm:p-8 mb-6 sm:mb-8">
             <div className="flex items-center gap-3 mb-4">
@@ -139,13 +137,12 @@ function App() {
           </div>
         )}
 
-        {/* Quote Card */}
         {quote && (
           <div className="glass rounded-3xl shadow-depth-lg p-6 sm:p-8 mb-6 sm:mb-8">
             <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
               <div className="flex-1">
                 <p className="text-lg sm:text-2xl italic mb-4 text-gray-800 dark:text-gray-100 font-normal">&ldquo;{quote.text}&rdquo;</p>
-                <p className="text-base sm:text-lg font-medium text-gray-600 dark:text-gray-400">— {quote.author}</p>
+                <p className="text-base sm:text-lg font-medium text-gray-600 dark:text-gray-400">&mdash; {quote.author}</p>
               </div>
               <button
                 onClick={fetchNewQuote}
@@ -158,7 +155,6 @@ function App() {
           </div>
         )}
 
-        {/* Users Grid */}
         <div className="mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6 tracking-tight">Sample Data</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -193,7 +189,6 @@ function App() {
           </div>
         </div>
 
-        {/* Stats Card */}
         <div className="glass rounded-3xl shadow-depth-lg p-6 sm:p-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 rounded-2xl bg-green-500/10 dark:bg-green-500/20">

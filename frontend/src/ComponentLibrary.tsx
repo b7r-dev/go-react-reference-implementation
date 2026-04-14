@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import {
   ArrowLeft,
   Check,
@@ -10,46 +10,52 @@ import {
   Loader2,
   Search,
   Bell,
-  Settings,
-  User,
   Mail,
   Lock,
   Eye,
   EyeOff,
   ChevronDown,
   Plus,
-  Minus,
-  Edit,
   Trash2,
   Download,
-  Upload,
   Share2,
   Heart,
   Star,
   Bookmark,
   MessageSquare,
-  Send
 } from 'lucide-react'
-import Header from './Header'
 import Footer from './Footer'
 
-function ComponentLibrary({ onBack }) {
+interface ComponentLibraryProps {
+  onBack: () => void
+}
+
+type ButtonVariant = 'primary' | 'secondary' | 'success' | 'danger' | 'ghost'
+type ButtonSize = 'sm' | 'md' | 'lg'
+
+interface GlassCardProps {
+  children: ReactNode
+  className?: string
+}
+
+interface ButtonProps {
+  children: ReactNode
+  variant?: ButtonVariant
+  size?: ButtonSize
+  icon?: ReactNode
+}
+
+function ComponentLibrary({ onBack }: ComponentLibraryProps) {
   const [activeTab, setActiveTab] = useState('buttons')
   const [showPassword, setShowPassword] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [selectedOption, setSelectedOption] = useState('')
-  const [checkboxStates, setCheckboxStates] = useState({
+  const [checkboxStates, setCheckboxStates] = useState<Record<string, boolean>>({
     option1: false,
     option2: true,
-    option3: false
+    option3: false,
   })
   const [radioValue, setRadioValue] = useState('option1')
-  const [sliderValue, setSliderValue] = useState(50)
-  const [switchStates, setSwitchStates] = useState({
-    switch1: true,
-    switch2: false,
-    switch3: true
-  })
 
   const tabs = [
     { id: 'buttons', label: 'Buttons' },
@@ -57,30 +63,30 @@ function ComponentLibrary({ onBack }) {
     { id: 'cards', label: 'Cards' },
     { id: 'alerts', label: 'Alerts' },
     { id: 'badges', label: 'Badges' },
-    { id: 'modals', label: 'Modals' }
-  ]
+    { id: 'modals', label: 'Modals' },
+  ] as const
 
-  const GlassCard = ({ children, className = '' }) => (
-    <div className={`glass dark:glass-dark rounded-2xl p-6 shadow-depth dark:shadow-glass-dark ${className}`}>
+  const GlassCard = ({ children, className = '' }: GlassCardProps) => (
+    <div className={`glass rounded-2xl p-6 shadow-depth dark:shadow-glass-dark ${className}`}>
       {children}
     </div>
   )
 
-  const Button = ({ children, variant = 'primary', size = 'md', icon, ...props }) => {
+  const Button = ({ children, variant = 'primary', size = 'md', icon, ...props }: ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
     const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 shadow-depth hover:shadow-depth-lg active:scale-95'
 
-    const variants = {
+    const variants: Record<ButtonVariant, string> = {
       primary: 'bg-indigo-500 hover:bg-indigo-600 text-white dark:bg-indigo-600 dark:hover:bg-indigo-700',
-      secondary: 'glass dark:glass-dark hover:bg-white/80 dark:hover:bg-slate-800/80 text-gray-700 dark:text-gray-200',
+      secondary: 'glass hover:bg-white/80 dark:hover:bg-slate-800/80 text-gray-700 dark:text-gray-200',
       success: 'bg-green-500 hover:bg-green-600 text-white dark:bg-green-600 dark:hover:bg-green-700',
       danger: 'bg-red-500 hover:bg-red-600 text-white dark:bg-red-600 dark:hover:bg-red-700',
-      ghost: 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200'
+      ghost: 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200',
     }
 
-    const sizes = {
+    const sizes: Record<ButtonSize, string> = {
       sm: 'px-3 py-1.5 text-sm',
       md: 'px-4 py-2 text-base',
-      lg: 'px-6 py-3 text-lg'
+      lg: 'px-6 py-3 text-lg',
     }
 
     return (
@@ -92,7 +98,7 @@ function ComponentLibrary({ onBack }) {
   }
 
   return (
-    <div className="min-h-screen bg-texture-light dark:bg-texture-dark">
+    <div className="min-h-screen bg-texture-light">
       <div className="header-glass sticky top-0 z-50 shadow-depth">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
@@ -113,7 +119,6 @@ function ComponentLibrary({ onBack }) {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Introduction */}
         <div className="mb-8">
           <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-2 tracking-tight">Component Library</h2>
           <p className="text-gray-600 dark:text-gray-400">
@@ -121,7 +126,6 @@ function ComponentLibrary({ onBack }) {
           </p>
         </div>
 
-        {/* Tabs */}
         <div className="glass rounded-3xl p-2 mb-8 shadow-depth">
           <div className="flex flex-wrap gap-2">
             {tabs.map(tab => (
@@ -140,7 +144,6 @@ function ComponentLibrary({ onBack }) {
           </div>
         </div>
 
-        {/* Buttons Tab */}
         {activeTab === 'buttons' && (
           <div className="space-y-6">
             <GlassCard>
@@ -194,7 +197,6 @@ function ComponentLibrary({ onBack }) {
           </div>
         )}
 
-        {/* Inputs Tab */}
         {activeTab === 'inputs' && (
           <div className="space-y-6">
             <GlassCard>
@@ -207,7 +209,7 @@ function ComponentLibrary({ onBack }) {
                   <input
                     type="text"
                     placeholder="Enter text..."
-                    className="w-full px-4 py-2 rounded-xl glass dark:glass-dark border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+                    className="w-full px-4 py-2 rounded-xl glass border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                   />
@@ -222,7 +224,7 @@ function ComponentLibrary({ onBack }) {
                     <input
                       type="text"
                       placeholder="Search..."
-                      className="w-full pl-10 pr-4 py-2 rounded-xl glass dark:glass-dark border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+                      className="w-full pl-10 pr-4 py-2 rounded-xl glass border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                     />
                   </div>
                 </div>
@@ -236,7 +238,7 @@ function ComponentLibrary({ onBack }) {
                     <input
                       type={showPassword ? 'text' : 'password'}
                       placeholder="Enter password..."
-                      className="w-full pl-10 pr-12 py-2 rounded-xl glass dark:glass-dark border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+                      className="w-full pl-10 pr-12 py-2 rounded-xl glass border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}
@@ -260,7 +262,7 @@ function ComponentLibrary({ onBack }) {
                     <select
                       value={selectedOption}
                       onChange={(e) => setSelectedOption(e.target.value)}
-                      className="w-full px-4 py-2 rounded-xl glass dark:glass-dark border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 appearance-none cursor-pointer"
+                      className="w-full px-4 py-2 rounded-xl glass border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-100 appearance-none cursor-pointer"
                     >
                       <option value="">Choose an option...</option>
                       <option value="option1">Option 1</option>
@@ -320,20 +322,19 @@ function ComponentLibrary({ onBack }) {
           </div>
         )}
 
-        {/* Cards Tab */}
         {activeTab === 'cards' && (
           <div className="space-y-6">
             <GlassCard>
               <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white tracking-tight">Basic Cards</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="glass dark:glass-dark rounded-2xl p-6 shadow-depth hover:shadow-depth-lg transition-all">
+                <div className="glass rounded-2xl p-6 shadow-depth hover:shadow-depth-lg transition-all">
                   <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">Card Title</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
                     This is a basic glass card with hover effect and depth shadow.
                   </p>
                 </div>
 
-                <div className="glass dark:glass-dark rounded-2xl p-6 shadow-depth hover:shadow-depth-lg transition-all">
+                <div className="glass rounded-2xl p-6 shadow-depth hover:shadow-depth-lg transition-all">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="p-2 rounded-xl bg-indigo-500/20">
                       <Star className="h-5 w-5 text-indigo-500" />
@@ -345,7 +346,7 @@ function ComponentLibrary({ onBack }) {
                   </p>
                 </div>
 
-                <div className="glass dark:glass-dark rounded-2xl overflow-hidden shadow-depth hover:shadow-depth-lg transition-all">
+                <div className="glass rounded-2xl overflow-hidden shadow-depth hover:shadow-depth-lg transition-all">
                   <div className="h-32 bg-gradient-to-br from-indigo-500 to-purple-600"></div>
                   <div className="p-6">
                     <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">Image Card</h3>
@@ -360,7 +361,7 @@ function ComponentLibrary({ onBack }) {
             <GlassCard>
               <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white tracking-tight">Interactive Cards</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="glass dark:glass-dark rounded-2xl p-6 shadow-depth hover:shadow-depth-xl transition-all cursor-pointer group">
+                <div className="glass rounded-2xl p-6 shadow-depth hover:shadow-depth-xl transition-all cursor-pointer group">
                   <div className="flex items-start justify-between mb-4">
                     <div className="p-3 rounded-xl bg-green-500/20 group-hover:bg-green-500/30 transition-colors">
                       <CheckCircle className="h-6 w-6 text-green-500" />
@@ -376,7 +377,7 @@ function ComponentLibrary({ onBack }) {
                   <Button size="sm" variant="success">View Details</Button>
                 </div>
 
-                <div className="glass dark:glass-dark rounded-2xl p-6 shadow-depth hover:shadow-depth-xl transition-all cursor-pointer group">
+                <div className="glass rounded-2xl p-6 shadow-depth hover:shadow-depth-xl transition-all cursor-pointer group">
                   <div className="flex items-start justify-between mb-4">
                     <div className="p-3 rounded-xl bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors">
                       <Info className="h-6 w-6 text-blue-500" />
@@ -396,13 +397,12 @@ function ComponentLibrary({ onBack }) {
           </div>
         )}
 
-        {/* Alerts Tab */}
         {activeTab === 'alerts' && (
           <div className="space-y-6">
             <GlassCard>
               <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white tracking-tight">Alert Variants</h2>
               <div className="space-y-4">
-                <div className="glass dark:glass-dark rounded-xl p-4 border-l-4 border-blue-500 shadow-depth">
+                <div className="glass rounded-xl p-4 border-l-4 border-blue-500 shadow-depth">
                   <div className="flex items-start gap-3">
                     <Info className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
@@ -414,7 +414,7 @@ function ComponentLibrary({ onBack }) {
                   </div>
                 </div>
 
-                <div className="glass dark:glass-dark rounded-xl p-4 border-l-4 border-green-500 shadow-depth">
+                <div className="glass rounded-xl p-4 border-l-4 border-green-500 shadow-depth">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
@@ -426,7 +426,7 @@ function ComponentLibrary({ onBack }) {
                   </div>
                 </div>
 
-                <div className="glass dark:glass-dark rounded-xl p-4 border-l-4 border-yellow-500 shadow-depth">
+                <div className="glass rounded-xl p-4 border-l-4 border-yellow-500 shadow-depth">
                   <div className="flex items-start gap-3">
                     <AlertCircle className="h-5 w-5 text-yellow-500 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
@@ -438,7 +438,7 @@ function ComponentLibrary({ onBack }) {
                   </div>
                 </div>
 
-                <div className="glass dark:glass-dark rounded-xl p-4 border-l-4 border-red-500 shadow-depth">
+                <div className="glass rounded-xl p-4 border-l-4 border-red-500 shadow-depth">
                   <div className="flex items-start gap-3">
                     <XCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
@@ -455,7 +455,7 @@ function ComponentLibrary({ onBack }) {
             <GlassCard>
               <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white tracking-tight">Dismissible Alerts</h2>
               <div className="space-y-4">
-                <div className="glass dark:glass-dark rounded-xl p-4 shadow-depth">
+                <div className="glass rounded-xl p-4 shadow-depth">
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3 flex-1">
                       <Info className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
@@ -476,7 +476,6 @@ function ComponentLibrary({ onBack }) {
           </div>
         )}
 
-        {/* Badges Tab */}
         {activeTab === 'badges' && (
           <div className="space-y-6">
             <GlassCard>
@@ -557,7 +556,6 @@ function ComponentLibrary({ onBack }) {
           </div>
         )}
 
-        {/* Modals Tab */}
         {activeTab === 'modals' && (
           <div className="space-y-6">
             <GlassCard>
@@ -567,8 +565,7 @@ function ComponentLibrary({ onBack }) {
               </p>
 
               <div className="space-y-6">
-                {/* Modal Preview */}
-                <div className="glass dark:glass-dark rounded-2xl p-8 shadow-depth-xl border border-gray-200 dark:border-gray-700">
+                <div className="glass rounded-2xl p-8 shadow-depth-xl border border-gray-200 dark:border-gray-700">
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 tracking-tight">Modal Title</h3>
@@ -586,7 +583,7 @@ function ComponentLibrary({ onBack }) {
                       Modal content goes here. This could include forms, information, or any other content.
                     </p>
 
-                    <div className="glass dark:glass-dark rounded-xl p-4">
+                    <div className="glass rounded-xl p-4">
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         Nested glass elements work great for highlighting important information within modals.
                       </p>
@@ -599,8 +596,7 @@ function ComponentLibrary({ onBack }) {
                   </div>
                 </div>
 
-                {/* Confirmation Modal Preview */}
-                <div className="glass dark:glass-dark rounded-2xl p-8 shadow-depth-xl border border-gray-200 dark:border-gray-700">
+                <div className="glass rounded-2xl p-8 shadow-depth-xl border border-gray-200 dark:border-gray-700">
                   <div className="flex flex-col items-center text-center mb-6">
                     <div className="p-4 rounded-full bg-red-500/20 mb-4">
                       <AlertCircle className="h-8 w-8 text-red-500" />
@@ -627,4 +623,3 @@ function ComponentLibrary({ onBack }) {
 }
 
 export default ComponentLibrary
-
